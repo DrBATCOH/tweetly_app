@@ -1,0 +1,47 @@
+body {
+    background-color: #fff;
+}
+
+aside {
+    float: left;
+    background: #fff;
+    width: 30%;
+    padding-left: 16%;
+    height: 100vh;
+    color: hsl(212, 89%, 35%);
+    border-right: 1px solid #4d4d4d ;
+}
+
+aside img {
+    width: 120px;
+    float: left;
+    margin-left: -15px;
+
+}
+
+aside .logo {
+    font-size: 30px;
+    margin-left: -20px;
+    font-weight: bold;
+    position: relative;
+    top: 30px;
+
+}
+
+aside ul {list-style: none}
+aside ul li {
+    color: #000000;
+    display: block;
+    margin-top: 45px;
+    font-size:22px;
+    transition: all .6s ease;
+}
+
+aside   ul li:hover, aside   ul a:hover {
+    color: hsl(212, 89%, 35%);
+    transform: scale(1.05);
+}
+
+aside ul a {
+    text-decoration: none;
+}
