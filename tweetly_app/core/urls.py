@@ -1,12 +1,13 @@
 from django.urls import path
-from core.views import (
+from core.presentation.views import (
     index,
     tags,
     profile,
     notifications,
-    trending
+    trending,
+    login_controller,
+    registration_controller
 )
-
 
 
 urlpatterns = [
@@ -15,4 +16,6 @@ urlpatterns = [
     path("profile/", profile, name="profile"),
     path("tags/", tags, name="tags"),
     path("notifications/", notifications, name="notifications"),
+    path("login/", login_controller, name="login"),
+    path("singup/", registration_controller, name="singup"),
 ]

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <H1> tweet feed</H1>
+    <div class="tweet-form">
+        {% for tweet in tweets %}
+                <tr>
+                    <td>{{ tweet.author }}</td>
+                    <td>{{ tweet.content }}</td>
+                </tr>
+            {% endfor %}
+    </div>
+
+{% endblock %} 

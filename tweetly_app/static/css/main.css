@@ -12,19 +12,29 @@ aside {
     border-right: 1px solid #4d4d4d ;
 }
 
+div.right-panel {
+    float: right;
+    background: #fff;
+    padding-right: 15vw;
+    height: 100vh;
+    color: hsl(212, 89%, 35%);
+    border-left: 1px solid #4d4d4d ;
+}
+
+
 aside img {
-    width: 120px;
+    width: 45%;
     float: left;
-    margin-left: -15px;
+    margin-left: -5%;
 
 }
 
 aside .logo {
-    font-size: 30px;
-    margin-left: -20px;
+    font-size: 1.8vw;
+    margin-left: -1.4vw;
     font-weight: bold;
     position: relative;
-    top: 30px;
+    top: 1.3vw;
 
 }
 
@@ -32,9 +42,9 @@ aside ul {list-style: none}
 aside ul li {
     color: #000000;
     display: block;
-    margin-top: 45px;
-    font-size:22px;
-    transition: all .6s ease;
+    margin-top: 2.01vw;
+    font-size:1.2vw;
+    transition: all .3s ease;
 }
 
 aside   ul li:hover, aside   ul a:hover {

@@ -1,0 +1,123 @@
+body {
+    background-color: #fff;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    margin-top: -4vw;
+}
+
+.logo img {
+    margin-left: -3vw;
+    width: 7.5vw;
+    height: 7.5vw;
+    margin-top: 5.5vw;
+}
+
+.logo h1 {
+    font-size: 50px;
+    margin-left: -30px;
+    margin-top: 7vw;
+    color: hsl(212, 89%, 35%);
+}
+
+.login-form {
+    background-color: #ffffff;
+    border: 1px solid #d1d1d1;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    text-decoration: none;
+}
+
+.login-form form {
+    display:flex;
+    flex-direction:column;
+}
+    
+.login-form label {
+    margin-bottom: 5vw;
+}
+
+.login-form input {
+    padding: 0.7vw;
+    margin-bottom: 0.5vw;
+    border: 1px solid #d1d1d1;
+    border-radius: 0.5vw;
+}
+
+.login-form button {
+    padding: 0.7vw;
+    background-color:#007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 0.5vw;
+    cursor: pointer;
+}
+
+.login-form p {
+    margin-top: 1vw;
+}
+
+.login-form a {
+    color: #007bff;
+}
+
+
+.country-fields {
+    display: flex;
+    gap: 0.75vw; 
+    margin-bottom: 0.3vw; 
+    width: 100%; 
+}
+
+.country-fields select {
+    flex: 1;
+    padding: 0.8vw;
+    border: 1px solid #d1d1d1;
+    border-radius: 0.5vw;
+    background-color: #fff;
+    color: #333;
+}
+
+
+.birthdate-fields {
+    display: flex;
+    gap: 0.75vw; 
+    margin-bottom: 0.5vw; 
+}
+
+.birthdate-fields select {
+    padding: 0.7vw;
+    border: 1px solid #d1d1d1;
+    border-radius: 0.5vw;
+    background-color: #fff;
+    color: #333;
+}
+
+.birthdate-fields select[name$="day"] {
+    width: 20%;
+    order: 1;
+}
+
+
+.birthdate-fields select[name$="month"] {
+    width: 40%;
+    order: 2;
+}
+
+
+.birthdate-fields select[name$="year"] {
+    width: 30%;
+    order: 3;
+}

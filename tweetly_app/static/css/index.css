@@ -1,0 +1,12 @@
+body {
+    background-color: rgb(255, 255, 255);
+}
+
+H1 {
+    color: blue;
+    text-align: center;
+}
+
+div {
+    float: right;
+}
