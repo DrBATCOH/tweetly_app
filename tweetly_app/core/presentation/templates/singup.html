@@ -13,8 +13,13 @@
             <h1>Tweetly</h1>
         </div>
         <div class="login-form">
+            {% if error_message %}
+                <h6>{{ error_message }}</h6>
+            {% endif %}
             <form method="POST", action="{% url 'singup' %}" enctype="multipart/form-data">
                 {% csrf_token %}
+                {{ form.first_name }}
+                {{ form.last_name }}
                 {{ form.username }}
                 {{ form.password }}
                 {{ form.email }}
@@ -27,6 +32,7 @@
               <button type="submit">SingUp</button>
             </form>
         </div>
+
     </div>
 </body>
 </html>

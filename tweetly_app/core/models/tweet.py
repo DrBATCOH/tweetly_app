@@ -1,14 +1,13 @@
 from django.db import models
-from .base import BaseModel
-from core.models import CustomUser
+from .base import Base
 
-class TweetModel(BaseModel):
-    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+
+class Tweet(Base):
+    author = models.ForeignKey(to="CustomUser", on_delete=models.CASCADE, related_name='tweets')
     content = models.TextField(max_length=150)
-    count_likes = models.PositiveIntegerField(default=0)
-    count_retweets = models.PositiveIntegerField(default=0)
-    count_comments = models.PositiveIntegerField(default=0)
-
+    tags = models.ManyToManyField(to="Tag", through="TweetTag", through_fields=("tweet", "tag"))
+    like = models.ManyToManyField(to="Like", through="TweetLike", through_fields=("tweet", "like"))
+    comments = models.ManyToManyField(to='Comment', through='TweetComment', through_fields=("tweet", "comment"))
 
     class Meta:
         db_table = "tweets"

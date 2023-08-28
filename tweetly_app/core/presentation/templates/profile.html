@@ -1,4 +1,45 @@
 {% extends "base.html" %}
 {% block content %}
-    PROFILE
+{% load static %}
+<html>
+    <body>
+
+        <div class="user">
+                {% if user.avatar %}
+                <img src="{{ user.avatar.url }}">
+            {% else %}
+                <img src="{% static 'img/avatar.jpg'%}" width="100" height="100">
+            {% endif %}
+            <p>{{ user.created_at|date:"H:i j M, Y"}}</p>
+            <p>{{ user.username}} {{ user.email }}</p>
+            <p>{{ user.first_name }} {{ user.last_name }}</p>
+            <p> Follower {{ user.follower.count }} Following {{ user.following.count }}</p>
+            <p style="color: green;">{% if is_online %}online{% else %} was online {{user.last_login|timesince}} ago{% endif %}</p>
+        </div>
+        <div class="tweet-form">
+            <div class="tweet-container" id="tweet-container">
+                {% for tweet in paginated %}
+                    <div class="tweet">
+                        <div class="tweet-header">
+                            <p class="user">{{ tweet.author.first_name }} {{ tweet.author.last_name }} {{ tweet.created_at|date:"H:i j M, Y" }}</p>
+                        </div>
+                        <div class="tweet-content">
+                            <a href="{% url 'tweet' tweet.id %}">{{ tweet.content }}</a>
+                        </div>
+                        <div class="tweet-actions">
+                            <i class="fa-solid fa-heart fa-lg"> {{ tweet.like.count }}</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <i class="fa-solid fa-comment fa-lg"> {{ tweet.tweetcomment_set.all|length }}</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <i class="fa-solid fa-retweet fa-lg"> {{ tweet.retweet_set.count }}</i>
+                        </div>
+                {% endfor %}
+            </div>
+        </table>
+        {% if prev_page is not None %}
+                <a href="{% url 'profile' %}?page={{ prev_page }}"><i class="fa-solid fa-circle-chevron-right fa-rotate-180"></i></a>
+            {% endif %}
+            {% if next_page is not None %}
+                <a href="{% url 'profile' %}?page={{ next_page }}"><i class="fa-solid fa-circle-chevron-right"></i></a>
+            {% endif %}
+    </body>
+    </html>
 {% endblock %}

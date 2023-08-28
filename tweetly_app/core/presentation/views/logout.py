@@ -12,6 +12,6 @@ if TYPE_CHECKING:
 
 
 @require_http_methods(["GET"])
-def logout_controller(request: HttpRequest) -> HttpResponse:
+def logout_view(request: HttpRequest) -> HttpResponse:
     logout(request=request)
-    return redirect(to="index")
+    return redirect(to="login")

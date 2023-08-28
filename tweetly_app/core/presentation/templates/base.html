@@ -15,13 +15,17 @@
                 <span class="logo">Tweetly</span>
                 <ul>
                     <a href ="{% url 'home' %}"><li><i class="fa-solid fa-house-user"></i> Home</li></a>
-                    <a href ="{% url 'trending' %}"><li><i class="fa-sharp fa-solid fa-earth-americas"></i> Trending </li></a>
                     <a href ="{% url 'profile' %}"><li><i class="fa-solid fa-user"></i> Profile</li></a>
-                    <a href ="{% url 'tags' %}"><li><i class="fa-sharp fa-solid fa-hashtag"></i> Tags</li></a>
+                    <a href ="{% url 'trending' %}"><li><i class="fa-sharp fa-solid fa-earth-americas"></i> Trending </li></a>
                     <a href ="{% url 'notifications' %}"><li><i class="fa-solid fa-bell"></i> Notifications</li></a>
-                    <a href ="{% url 'login' %}"><li><i class="fa-solid fa-right-to-bracket"></i> Exit</li></a>
-
+                    <a href ="{% url 'logout' %}"><li><i class="fa-solid fa-right-to-bracket"></i>Exit</li></a>
+                    <a href ="{% url 'add_tweet' %}"><button type="submit">POST</button></a>
+                    
                 </ul>
+                <div class="activ-user">
+                    <i class="fa-regular fa-circle-user"></i> {{user.first_name}} {{user.last_name}}<br> {{user.email}}
+                </div>
+                
             </aside>
             <div class="right-panel">
                 <ul>

@@ -18,7 +18,7 @@ from core.presentation.forms import LoginForm
 
 
 @require_http_methods(["GET", "POST"])
-def login_controller(request: HttpRequest) -> HttpResponse:
+def login_view(request: HttpRequest) -> HttpResponse:
     if request.method == "GET":
         form = LoginForm()
         context = {"form": form}
@@ -36,7 +36,7 @@ def login_controller(request: HttpRequest) -> HttpResponse:
 
             login(request=request, user=user)
 
-            return redirect(to="index")
+            return redirect(to="home")
         else:
             context = {"form": form}
             return render(request=request, template_name="login.html", context=context)

@@ -1,22 +1,25 @@
-from .registration import registration_controller#, confirm_email_stub_controller, registration_confirmation_controller
-from .login import login_controller
+from .registration import singup, singup_confirmation, confirmation_email_stub
+from .login import login_view
+from .logout import logout_view
 from .index import index
-from .tags import tags
-from .tweet import add_tweet
 from .notification import notifications
-from .profile import profile
+from .profile import profile, edit_profile
 from .trending import trending
+from .tweet import add_tweet, get_tweet
 
 
 __all__ = [
-    'registration_controller',
-    'confirm_email_stub_controller',
-    'registration_confirmation_controller',
-    'login_controller',
+    'singup',
+    'singup_confirmation',
+    'confirmation_email_stub',
+    'login_view',
+    'logout_view',
     'index',
-    'tags',
-    'add_tweet',
+    'get_tweet',
     'notifications',
     'profile',
-    'trending'
+    'trending',
+    'edit_profile',
+    'profile',
+    'add_tweet'
 ]

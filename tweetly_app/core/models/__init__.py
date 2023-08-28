@@ -1,23 +1,34 @@
-from .base import BaseModel
-from .customuser import CustomUser
-from .tweet import TweetModel
-from .comment import CommentModel
-from .emailcode import EmailConfirmationCodes
-from .follower import FollowerModel
-from .notification import NotificationModel
-from .tag import TagModel
-from .retweet import RetweetModel
+from .base import Base
+from .comment import Comment
 from .country import CountryModel
+from .customuser import CustomUser
+from .emailcode import EmailConfirmationCodes
+from .follower import Follower
+from .like import Like
+from .notification import Notification
+from .retweet import Retweet
+from .tag import Tag
+from .tweet_comment import TweetComment
+from .tweet_like import TweetLike
+from .tweet_tag import TweetTag
+from .tweet import Tweet
+from .user_notification import UserNotification
+
 
 __all__ = [
-    'BaseModel',
-    'TweetModel',
-    'CommentModel',
-    'EmailConfirmationCodes',
-    'FollowerModel',
-    'NotificationModel',
-    'TagModel',
-    'RetweetModel',
+    'Base',
+    'Comment',
     'CountryModel',
-    'CustomUser'
+    'CustomUser',
+    'EmailConfirmationCodes',
+    'Follower',
+    'Like',
+    'Notification',
+    'Retweet',
+    'Tag',
+    'TweetComment',
+    'TweetLike',
+    'TweetTag',
+    'Tweet',
+    'UserNotification'
 ]

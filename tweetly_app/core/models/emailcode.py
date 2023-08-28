@@ -1,15 +1,9 @@
 from django.db import models
-from .base import BaseModel
-from .customuser import CustomUser
+from .base import Base
 
 
-
-class EmailConfirmationCodes(BaseModel):
-    user = models.ForeignKey(
-        CustomUser,
-        on_delete=models.CASCADE,
-        related_name="codes",
-    )
+class EmailConfirmationCodes(Base):
+    user = models.ForeignKey(to="CustomUser", on_delete=models.CASCADE, related_name="codes")
     code = models.CharField(max_length=100, unique=True)
     expiration = models.PositiveIntegerField()
 

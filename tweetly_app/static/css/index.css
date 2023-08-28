@@ -1,12 +1,65 @@
-body {
-    background-color: rgb(255, 255, 255);
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
 }
 
-H1 {
-    color: blue;
-    text-align: center;
+.top-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.7vw;
+    outline: none;
 }
 
-div {
-    float: right;
+
+.search-form .tags,
+.search-form .author{
+    display: inline-flex;
+    align-items: center;
+    margin-right: 0.6vw;
+    padding: 1vw;
+    border: 2px solid #007bff;
+    border-radius: 1vw;
+    font-size: 0.5vw;
+    width: 10vw;
+    outline: none;
+}
+
+
+.search-form button {
+    margin-top: 1vw;
+    padding: 1vw;
+    background-color:#007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 1vw;
+    cursor: pointer;
+    width: 11vw;
+}
+
+.tweet {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 0.5vw solid #ccc;
+    border-radius: 2vw;
+    padding: 1vw;
+    margin: 0.2vw;
+    margin-left: 29.85vw;
+    max-width: 35vw;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 1vw;
+}
+
+.pagination a {
+    margin: 0 2vw;
+    font-size: 1vw;
+    color: #007bff;
 }
