@@ -1,0 +1,19 @@
+
+.tweet {
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 0.2vw solid #ccc;
+    border-radius: 2vw;
+    padding: 0.8vw;
+    margin: 0.2vw;
+    margin-left: 31vw;
+    margin-top: 0px;
+    max-width: 35%;
+}
+
+.tweet-actions {
+    text-align: center;
+    letter-spacing: 5px;
+    margin-bottom: 1px;
+    margin-top: 10px;
+}

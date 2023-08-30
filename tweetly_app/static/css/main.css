@@ -1,6 +1,7 @@
 body {
     background-color: #fff;
     position:static;
+    overflow: hidden;
     
 }
 
@@ -8,19 +9,19 @@ aside {
     float: left;
     background: #fff;
     width: 30%;
-    padding-left: 16%;
+    padding-left: 16vw;
     height: 100vh;
     color: hsl(212, 89%, 35%);
-    border-right: 1px solid #4d4d4d ;
+    border-right: 1px solid #4d4d4d;
 }
 
 div.right-panel {
     float: right;
     background: #fff;
-    padding-right: 15vw;
+    padding-right: 14vw;
     height: 100vh;
     color: hsl(212, 89%, 35%);
-    border-left: 1px solid #4d4d4d ;
+    border-left: 1px solid #4d4d4d;
 }
 
 
@@ -63,19 +64,24 @@ aside ul a {
   float: left;
   width: 150%;
   color: rgb(0, 0, 0);
-  margin-top: 130%;
+  margin-top: 140%;
   margin-left: 10%;
   text-decoration: none;
     
 }
 .left-panel button {
-    margin-top: 15%;
+    margin-top: 16%;
     padding: 0.6vw;
     background-color:#007bff;
     color: #ffffff;
     border: none;
-    border-radius: 1vw;
+    border-radius: 28px;
     cursor: pointer;
     width: 9vw;
+    transition: 0.2s;
 }
 
+.left-panel button:focus,
+.left-panel button:hover{
+    background-color: #003f83;
+}

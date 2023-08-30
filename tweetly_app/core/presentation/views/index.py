@@ -26,7 +26,7 @@ def index(request: HttpRequest) -> HttpResponse:
         tweets = search_tweet(search_filters)
 
         page_number = request.GET.get("page", 1)
-        paginator = CustomPagination(per_page=5)
+        paginator = CustomPagination(per_page=6)
 
         try:
             tweets_paginated = paginator.paginate(data=tweets, page_number=page_number)

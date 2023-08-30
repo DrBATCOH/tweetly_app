@@ -12,9 +12,10 @@ if TYPE_CHECKING:
 
 
 from core.presentation.converters import convert_data_from_form_to_dto
-from core.business_logic.services import create_tweet, get_tweet_by_id
+from core.business_logic.services import create_tweet, get_tweet_by_id, get_tweets_by_tag
 from core.presentation.forms import TweetForm
-from core.business_logic.dto import TweetDTO
+from core.business_logic.dto import TweetDTO, TagDTO
+from core.models import Tag
 
 
 @require_http_methods(request_method_list=["GET", "POST"])
@@ -40,3 +41,11 @@ def get_tweet(request: HttpRequest, tweet_id: int) -> HttpResponse:
     tweet = get_tweet_by_id(tweet_id=tweet_id)
     context = {"tweet": tweet}
     return render(request=request, template_name="tweet.html", context=context)
+
+
+@login_required
+@require_http_methods(request_method_list=["GET"])
+def tweet_by_tag(request: HttpRequest, tag_name) -> HttpResponse:
+    tweets = get_tweets_by_tag(TagDTO(name=tag_name))
+    context = {"tweets": tweets}
+    return render(request=request, template_name="tweet_by_tag.html", context=context)

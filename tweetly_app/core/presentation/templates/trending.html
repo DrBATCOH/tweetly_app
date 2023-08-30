@@ -1,4 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
-    trending
+    {% csrf_token %}
+    {% for tag in tags %}
+        <a href="{% url 'tweet_by_tag' tag.name %}">
+            {{ tag.name|capfirst }} ({{ tag.tweets_count }} tweets)
+        </a>
+        <br>
+    {% endfor %}
 {% endblock %}

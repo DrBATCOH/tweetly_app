@@ -7,11 +7,13 @@ from django.db.models import Count, Q
 
 
 if TYPE_CHECKING:
-    from core.business_logic.dto import TweetDTO, SearchTweetDTO
+    from core.business_logic.dto import TweetDTO, SearchTweetDTO, TagDTO, TweetTagDTO
     from core.models import CustomUser
 
 from core.models import Tweet, CustomUser, Tag
 from .replace_swear_word import replace_swear_word_in_text
+from core.business_logic.exceptions import TweetNotFound
+from core.business_logic.dto import TweetTagDTO
 
 
 def create_tweet(data: TweetDTO, author: CustomUser) -> None:
@@ -35,11 +37,14 @@ def create_tweet(data: TweetDTO, author: CustomUser) -> None:
 
 
 def get_tweet_by_id(tweet_id: int) -> Tweet:
-    tweet = Tweet.objects.annotate(
-        like_count=Count("Like"),
-        repost_count=Count("Retweet"),
-        comment_count=Count("Comment")
-    ).get(pk=tweet_id)
+    try:
+        tweet = Tweet.objects.annotate(
+            like_count=Count("like"),
+            retweet_count=Count("retweet"),
+            comment_count=Count("comments")
+        ).get(pk=tweet_id)
+    except Tweet.DoesNotExist:
+        raise TweetNotFound("Tweet does not exist.")
     return tweet
 
 
@@ -56,3 +61,18 @@ def search_tweet(data: SearchTweetDTO) -> list[Tweet]:
     tweets = tweets.order_by("-created_at")
 
     return list(tweets)
+
+
+def get_tweets_by_tag(data: TagDTO) -> TweetTagDTO:
+
+    tag = Tag.objects.get(name=data.name)
+    tweets = (Tweet.objects.filter(tags=tag)
+              .select_related("author")
+              .annotate(like_count=Count("like"),
+                        retweet_count=Count("retweet"),
+                        comment_count=Count("comments"))
+              .prefetch_related("like", "comments")
+              .order_by("-created_at")
+              )
+    tag_tweet = TweetTagDTO(tag=tag, tweets=tweets)
+    return tag_tweet

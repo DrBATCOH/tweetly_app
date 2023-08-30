@@ -4,8 +4,8 @@ from .logout import logout_view
 from .index import index
 from .notification import notifications
 from .profile import profile, edit_profile
-from .trending import trending
-from .tweet import add_tweet, get_tweet
+from .trending import get_populate_tag_by_country
+from .tweet import add_tweet, get_tweet, tweet_by_tag
 
 
 __all__ = [
@@ -18,8 +18,9 @@ __all__ = [
     'get_tweet',
     'notifications',
     'profile',
-    'trending',
+    'get_populate_tag_by_country',
     'edit_profile',
     'profile',
-    'add_tweet'
+    'add_tweet',
+    'tweet_by_tag'
 ]

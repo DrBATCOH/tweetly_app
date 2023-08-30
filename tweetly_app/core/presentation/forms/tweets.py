@@ -13,19 +13,22 @@ class TweetForm(forms.Form):
         max_length=150,
         required=False
     )
+    
 
 
 class SearchTweetForm(forms.Form):
 
-    tags = forms.CharField(label=False,
-                           max_length=30,
-                           widget=forms.TextInput(attrs={'rows': 2, 'cols': 10,'placeholder': 'Tags'}),
-                           strip=True,
-                           required=False
-                           )
-    author = forms.CharField(label=False,
-                             max_length=30,
-                             widget=forms.TextInput(attrs={'rows': 2, 'cols': 10,'placeholder': 'Author'}),
-                             strip=True,
-                             required=False
-                             )
+    tags = forms.CharField(
+        label=False,
+        max_length=30,
+        widget=forms.TextInput(attrs={'placeholder': 'Tags'}),
+        strip=True,
+        required=False
+    )
+    author = forms.CharField(
+        label=False,
+        max_length=30,
+        widget=forms.TextInput(attrs={'placeholder': 'Author'}),
+        strip=True,
+        required=False
+    )

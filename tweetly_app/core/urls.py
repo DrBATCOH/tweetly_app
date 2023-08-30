@@ -3,7 +3,7 @@ from core.presentation.views import (
     index,
     profile,
     notifications,
-    trending,
+    get_populate_tag_by_country,
     login_view,
     logout_view,
     singup,
@@ -11,13 +11,14 @@ from core.presentation.views import (
     confirmation_email_stub,
     get_tweet,
     add_tweet,
+    tweet_by_tag
 
 )
 
 
 urlpatterns = [
     path("", index, name="home"),
-    path("trending/", trending, name="trending"),
+    path("trending/", get_populate_tag_by_country, name="trending"),
     path('profile/', profile, name='profile'),
     path("notifications/", notifications, name="notifications"),
     path("login/", login_view, name="login"),
@@ -27,4 +28,5 @@ urlpatterns = [
     path("confir/note/", confirmation_email_stub, name="confirm-stub"),
     path("tweet_list/<int:tweet_id>", get_tweet, name="tweet"),
     path("add_tweet", add_tweet, name="add_tweet"),
+    path('tweet_by_tag/<str:tag_name>/', tweet_by_tag, name='tweet_by_tag'),
 ]

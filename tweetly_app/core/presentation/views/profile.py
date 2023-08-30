@@ -31,7 +31,6 @@ def profile(request: HttpRequest) -> HttpResponse:
     user_tweet = Tweet.objects.filter(author=user).order_by("-created_at")
     page_number = request.GET.get("page", 1)
     paginator = CustomPagination(per_page=3)
-    print(user_tweet)
     try:
         tweets_paginated = paginator.paginate(data=user_tweet, page_number=page_number)
     except PageNotExists:
@@ -54,7 +53,7 @@ def edit_profile(request):
         form = UserChangeForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect('profile')  # Перенаправляем на страницу профиля после успешного обновления
+            return redirect('profile')
     else:
         form = UserChangeForm(instance=request.user)
 

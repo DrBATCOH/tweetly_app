@@ -12,3 +12,7 @@ class InvalidAuthCredentials(Exception):
 
 class InvlidRegistrationAge(Exception):
     ...
+
+
+class TweetNotFound(Exception):
+    ...
