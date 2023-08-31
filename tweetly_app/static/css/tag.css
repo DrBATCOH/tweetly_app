@@ -1,0 +1,33 @@
+.tags {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 0.2vw solid #ccc;
+    border-radius: 2vw;
+    padding: 10px;
+    margin: 0.2vw;
+    margin-left: 31vw;
+    max-width: 25%;
+    font-size: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .tag-link {
+    text-decoration: none;
+    color: black;
+  }
+  
+  .tag-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .tag-name {
+    margin-right: 10px;
+    text-align: left;   
+  }
+  
+  .tweet-count {
+    color: #146aff;
+    text-align: right;
+  }

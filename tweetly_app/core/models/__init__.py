@@ -4,7 +4,6 @@ from .country import CountryModel
 from .customuser import CustomUser
 from .emailcode import EmailConfirmationCodes
 from .follower import Follower
-from .like import Like
 from .notification import Notification
 from .retweet import Retweet
 from .tag import Tag
@@ -22,7 +21,6 @@ __all__ = [
     'CustomUser',
     'EmailConfirmationCodes',
     'Follower',
-    'Like',
     'Notification',
     'Retweet',
     'Tag',

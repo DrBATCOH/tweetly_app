@@ -22,7 +22,7 @@
                         <a href="{% url 'tweet' tweet.id %}">{{ tweet.content }}</a>
                     </div>
                     <div class="tweet-actions">
-                        <i class="fa-solid fa-heart fa-lg" style="color: #fa0000"> {{ tweet.like.count }}</i>
+                        <a href="{% url 'like_tweet' tweet.id %}"><i class="fa-solid fa-heart fa-lg" style="color: #fa0000"> {{ tweet.like.count }}</i></a>
                         <i class="fa-solid fa-comment fa-lg" style="color: #007bff"> {{ tweet.tweetcomment_set.all|length }}</i>
                         <i class="fa-solid fa-retweet fa-lg" style="color: #15f821"> {{ tweet.retweet_set.count }}</i>
                     </div>

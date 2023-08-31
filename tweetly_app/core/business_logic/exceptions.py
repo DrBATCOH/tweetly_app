@@ -16,3 +16,6 @@ class InvlidRegistrationAge(Exception):
 
 class TweetNotFound(Exception):
     ...
+
+class SelfLikeError(Exception):
+    ...

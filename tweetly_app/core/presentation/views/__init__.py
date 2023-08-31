@@ -6,6 +6,7 @@ from .notification import notifications
 from .profile import profile, edit_profile
 from .trending import get_populate_tag_by_country
 from .tweet import add_tweet, get_tweet, tweet_by_tag
+from .like import like_tweet
 
 
 __all__ = [
@@ -22,5 +23,6 @@ __all__ = [
     'edit_profile',
     'profile',
     'add_tweet',
-    'tweet_by_tag'
+    'tweet_by_tag',
+    'like_tweet'
 ]

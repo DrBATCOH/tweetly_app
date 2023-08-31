@@ -3,6 +3,7 @@ from .registration import create_user, confirm_user_registration
 from .tweet import create_tweet, get_tweet_by_id, search_tweet, get_tweets_by_tag
 from .replace_swear_word import replace_swear_word_in_text
 from .tag import get_tags_by_country
+from .like import add_like_by_tweet
 
 
 __all__ = [
@@ -14,5 +15,6 @@ __all__ = [
     'replace_swear_word_in_text',
     'search_tweet',
     'get_tags_by_country',
-    'get_tweets_by_tag'
+    'get_tweets_by_tag',
+    'add_like_by_tweet'
 ]

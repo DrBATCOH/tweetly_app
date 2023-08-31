@@ -11,7 +11,8 @@ from core.presentation.views import (
     confirmation_email_stub,
     get_tweet,
     add_tweet,
-    tweet_by_tag
+    tweet_by_tag,
+    like_tweet
 
 )
 
@@ -29,4 +30,5 @@ urlpatterns = [
     path("tweet_list/<int:tweet_id>", get_tweet, name="tweet"),
     path("add_tweet", add_tweet, name="add_tweet"),
     path('tweet_by_tag/<str:tag_name>/', tweet_by_tag, name='tweet_by_tag'),
+    path("like/<int:tweet_id>/", like_tweet, name="like_tweet"),
 ]
