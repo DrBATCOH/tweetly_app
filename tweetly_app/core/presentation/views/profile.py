@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserChangeForm
+from django.db.models import Q
 from django.utils import timezone
 
 
@@ -13,10 +14,6 @@ if TYPE_CHECKING:
     from django.http import HttpRequest
 
 
-from core.presentation.converters import convert_data_from_form_to_dto
-from core.business_logic.services import create_tweet, get_tweet_by_id
-from core.presentation.forms import TweetForm
-from core.business_logic.dto import TweetDTO
 from core.models import CustomUser, Tweet
 from core.presentation.paginator import CustomPagination, PageNotExists
 
@@ -28,11 +25,12 @@ def profile(request: HttpRequest) -> HttpResponse:
     user = request.user
     last_login = user.last_login
     is_online = (timezone.now() - last_login).seconds > 300
-    user_tweet = Tweet.objects.filter(author=user).order_by("-created_at")
+    tweet = Tweet.objects.filter(Q(author=user) | Q(retweet__user=user)).order_by("-created_at")
     page_number = request.GET.get("page", 1)
-    paginator = CustomPagination(per_page=3)
+    paginator = CustomPagination(per_page=4)
+    print(tweet)
     try:
-        tweets_paginated = paginator.paginate(data=user_tweet, page_number=page_number)
+        tweets_paginated = paginator.paginate(data=tweet, page_number=page_number)
     except PageNotExists:
         return HttpResponseBadRequest("Page doesn't exist.")
 
@@ -58,4 +56,3 @@ def edit_profile(request):
         form = UserChangeForm(instance=request.user)
 
     return render(request, 'edit_profile.html', {'form': form})
-

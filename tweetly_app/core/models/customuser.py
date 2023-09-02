@@ -15,8 +15,3 @@ class CustomUser(AbstractUser, Base):
 
     class Meta:
         db_table = "custom_user"
-
-
-# обращение к ролям и разрешениям через мою кастомную модель а не через  group_set (что бы не было ошибки)
-# CustomUser._meta.get_field('groups').remote_field.related_name = 'custom_users'
-# CustomUser._meta.get_field('user_permissions').remote_field.related_name = 'custom_users'

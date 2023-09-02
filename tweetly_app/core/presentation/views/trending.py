@@ -18,5 +18,6 @@ def get_populate_tag_by_country(request: HttpRequest) -> HttpResponse:
     user = request.user
     country = user.country
     tags = get_tags_by_country(country=country)
+    print(tags)
     context = {"tags": tags}
     return render(request=request, template_name="trending.html", context=context)

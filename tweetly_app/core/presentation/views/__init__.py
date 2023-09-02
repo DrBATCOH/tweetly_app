@@ -7,6 +7,8 @@ from .profile import profile, edit_profile
 from .trending import get_populate_tag_by_country
 from .tweet import add_tweet, get_tweet, tweet_by_tag
 from .like import like_tweet
+from .retweet import make_retweet
+from .comment import add_comment
 
 
 __all__ = [
@@ -24,5 +26,7 @@ __all__ = [
     'profile',
     'add_tweet',
     'tweet_by_tag',
-    'like_tweet'
+    'like_tweet',
+    'make_retweet',
+    'add_comment'
 ]

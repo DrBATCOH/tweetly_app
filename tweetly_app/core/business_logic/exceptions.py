@@ -19,3 +19,6 @@ class TweetNotFound(Exception):
 
 class SelfLikeError(Exception):
     ...
+
+class SelfRetweetError(Exception):
+    ...

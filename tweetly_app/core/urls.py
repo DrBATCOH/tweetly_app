@@ -12,8 +12,9 @@ from core.presentation.views import (
     get_tweet,
     add_tweet,
     tweet_by_tag,
-    like_tweet
-
+    like_tweet,
+    make_retweet,
+    add_comment
 )
 
 
@@ -31,4 +32,6 @@ urlpatterns = [
     path("add_tweet", add_tweet, name="add_tweet"),
     path('tweet_by_tag/<str:tag_name>/', tweet_by_tag, name='tweet_by_tag'),
     path("like/<int:tweet_id>/", like_tweet, name="like_tweet"),
+    path("retweet/<int:tweet_id>/", make_retweet, name="retweet"),
+    path("comment/<int:tweet_id>/", add_comment, name="comment"),
 ]

@@ -38,8 +38,12 @@
 }
 
 .tweet-header {
-    border-bottom: 1px solid #ccc;
-    
+    color: hsl(212, 89%, 35%);
+}
+
+a {
+    color: black;
+    text-decoration: none;
 }
 
 .pagination {
@@ -75,3 +79,6 @@
     border: #003f83;
 }
 
+.tweet-content p {
+    color:#ff3333
+}

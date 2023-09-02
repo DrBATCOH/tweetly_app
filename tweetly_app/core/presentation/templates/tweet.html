@@ -10,20 +10,42 @@
     </head>
     <body>
         <div class="tweet">
-            <div class="tweet-header">
-                {{ tweet.author.first_name }}
-                {{ tweet.author.last_name }}
-                {{ tweet.created_at|date:"H:i j M, Y" }}
-            </div>
-            <div class="tweet-content">
-                <a href="{% url 'tweet' tweet.id %}">{{ tweet.content }}</a>
-            </div>
+            <a href="{% url 'tweet' tweet.id %}">
+                <div class="tweet-header">
+                    {{ tweet.author.first_name }}
+                    {{ tweet.author.last_name }}
+                    {{ tweet.created_at|date:"H:i j M, Y" }}
+                </div>
+                <div class="tweet-content">
+                    {{ tweet.content }}
+                </div>
+            </a>
             <div class="tweet-actions">
-                <a href="{% url 'like_tweet' tweet.id %}"><i class="fa-solid fa-heart fa-lg" style="color: #fa0000"> {{ tweet.like.count }}</i></a>
-                <i class="fa-solid fa-comment fa-lg" style="color: #007bff"> {{ tweet.tweetcomment_set.all|length }}</i>
+                <a href="{% url 'like_tweet' tweet.id %}">
+                    <i class="fa-solid fa-heart fa-lg" style="color: #fa0000"> {{ tweet.like.count }}</i>
+                </a>
+                <i class="fa-solid fa-comment fa-lg" style="color: #007bff"> {{ tweet.comment_count }}</i>
                 <i class="fa-solid fa-retweet fa-lg" style="color: #15f821"> {{ tweet.retweet_set.count }}</i>
             </div>
         </div>
+        <div class="comment-form">
+            <form method="post" action="{% url 'comment' tweet.id %}">
+                {% csrf_token %}
+                <div class="comment-content"></div>
+                    {{ form.comment }}
+                <button type="submit">Comment</button>
+            </form>
+        </div>
+        <div class="comment">
+            {% for comment in tweet.comments.all %}
+                <div class="comment-item">
+                    <p>Comment by {{ comment.user.first_name }} {{ comment.user.last_name }}</p>
+                    <p>{{ comment.created_at|date:"H:i j M, Y" }}</p>
+                    <p>{{ comment.content }}</p>
+                </div>
+            {% endfor %}
+        </div>
     </body>
+    
     </html>
 {% endblock %}

@@ -15,7 +15,7 @@ from core.presentation.converters import convert_data_from_form_to_dto
 from core.business_logic.services import create_tweet, get_tweet_by_id, get_tweets_by_tag
 from core.presentation.forms import TweetForm
 from core.business_logic.dto import TweetDTO, TagDTO
-from core.models import Tag
+from core.models import Comment
 
 
 @require_http_methods(request_method_list=["GET", "POST"])
@@ -39,6 +39,7 @@ def add_tweet(request: HttpRequest) -> HttpResponse:
 @require_http_methods(request_method_list=["GET"])
 def get_tweet(request: HttpRequest, tweet_id: int) -> HttpResponse:
     tweet = get_tweet_by_id(tweet_id=tweet_id)
+    tweet.comment_count = Comment.objects.filter(tweet=tweet).count()
     context = {"tweet": tweet}
     return render(request=request, template_name="tweet.html", context=context)
 

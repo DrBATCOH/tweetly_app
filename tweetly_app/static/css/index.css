@@ -19,16 +19,16 @@
 
 .search-form input,
 .search-form button {
-    font-family: sans-serif;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px;
-    margin-bottom: 5px;
-    padding: 16px;
-    width: 10vw;
-    border-radius: 28px;
-    border: 0.2vw solid #007bff;
-    transition: 0.2s;
+        font-family: sans-serif;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+        margin-bottom: 5px;
+        padding: 16px;
+        width: 10vw;
+        border-radius: 28px;
+        border: 0.2vw solid #007bff;
+        transition: 0.2s;
 }
 
 .search-form .tags,
@@ -75,11 +75,13 @@
 }
 
 .tweet-header {
-    border-bottom: 1px solid #ccc;
-    
+    color: hsl(212, 89%, 35%);
 }
 
-
+a {
+    color: black;
+    text-decoration: none;
+}
 
 .pagination {
     display: flex;

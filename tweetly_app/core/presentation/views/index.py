@@ -14,6 +14,7 @@ from core.presentation.paginator import CustomPagination, PageNotExists
 from core.business_logic.dto import SearchTweetDTO
 from core.presentation.converters import convert_data_from_form_to_dto
 from core.business_logic.services import search_tweet
+from core.models import Comment
 
 
 @require_http_methods(request_method_list=["GET"])
@@ -24,6 +25,9 @@ def index(request: HttpRequest) -> HttpResponse:
     if form.is_valid():
         search_filters = convert_data_from_form_to_dto(SearchTweetDTO, form.cleaned_data)
         tweets = search_tweet(search_filters)
+
+        for tweet in tweets:
+            tweet.comment_count = Comment.objects.filter(tweet=tweet).count()
 
         page_number = request.GET.get("page", 1)
         paginator = CustomPagination(per_page=6)
