@@ -10,12 +10,12 @@
     </head>
     <body>
         <div class="tweet">
+            <div class="tweet-header">
+                {{ tweet.author.first_name }}
+                {{ tweet.author.last_name }}
+                {{ tweet.created_at|date:"H:i j M, Y" }}
+            </div>
             <a href="{% url 'tweet' tweet.id %}">
-                <div class="tweet-header">
-                    {{ tweet.author.first_name }}
-                    {{ tweet.author.last_name }}
-                    {{ tweet.created_at|date:"H:i j M, Y" }}
-                </div>
                 <div class="tweet-content">
                     {{ tweet.content }}
                 </div>

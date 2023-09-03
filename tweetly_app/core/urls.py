@@ -1,7 +1,7 @@
 from django.urls import path
 from core.presentation.views import (
     index,
-    profile,
+    user_profile,
     notifications,
     get_populate_tag_by_country,
     login_view,
@@ -14,14 +14,20 @@ from core.presentation.views import (
     tweet_by_tag,
     like_tweet,
     make_retweet,
-    add_comment
+    add_comment,
+    author_profile,
+    follow,
+    unfollow,
+    all_follower,
+    all_following
 )
 
 
 urlpatterns = [
     path("", index, name="home"),
     path("trending/", get_populate_tag_by_country, name="trending"),
-    path('profile/', profile, name='profile'),
+    path('profile/', user_profile, name='profile'),
+    path('author/<str:username>/', author_profile, name='author_profile'),
     path("notifications/", notifications, name="notifications"),
     path("login/", login_view, name="login"),
     path("logout/", logout_view, name="logout"),
@@ -34,4 +40,9 @@ urlpatterns = [
     path("like/<int:tweet_id>/", like_tweet, name="like_tweet"),
     path("retweet/<int:tweet_id>/", make_retweet, name="retweet"),
     path("comment/<int:tweet_id>/", add_comment, name="comment"),
+    path("follow/<str:username>/", follow, name="follow"),
+    path("unfollow/<str:username>/", unfollow, name="unfollow"),
+    path("followers/", all_follower, name="follower"),
+    path("following/", all_following, name="following"),
+
 ]

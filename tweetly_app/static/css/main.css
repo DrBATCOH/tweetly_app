@@ -9,7 +9,7 @@ aside {
     float: left;
     background: #fff;
     width: 30%;
-    padding-left: 16vw;
+    padding-left: 17vw;
     height: 100vh;
     color: hsl(212, 89%, 35%);
     border-right: 1px solid #4d4d4d ;
@@ -18,7 +18,7 @@ aside {
 div.right-panel {
     float: right;
     background: #fff;
-    padding-right: 14vw;
+    padding-right: 19vw;
     height: 100vh;
     color: hsl(212, 89%, 35%);
     border-left: 1px solid #4d4d4d;

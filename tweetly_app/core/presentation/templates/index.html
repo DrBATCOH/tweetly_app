@@ -22,23 +22,24 @@
         <div class="tweet-container" id="tweet-container">
             {% for tweet in tweets %}
                 <div class="tweet">
-                    <a href="{% url 'tweet' tweet.id %}">
-                        <div class="tweet-header">
-                            {{ tweet.author.first_name }}
-                            {{ tweet.author.last_name }}
-                            {{ tweet.created_at|date:"H:i j M, Y" }}
-                        </div>
-                        <div class="tweet-content">
-                            {{ tweet.content }}
-                        </div>
-                        <div class="tweet-actions">
-                            <a href="{% url 'like_tweet' tweet.id %}"><i class="fa-solid fa-heart fa-lg" style="color: #fa0000"> {{ tweet.like.count }}</i></a>
-                            <i class="fa-solid fa-comment fa-lg" style="color: #007bff"> {{ tweet.comment_count }}</i>
-                            <a href="{% url 'retweet' tweet.id %}"><i class="fa-solid fa-retweet fa-lg" style="color: #15f821"> {{ tweet.retweet_set.count }}</i></a>
-                        </div>
+                    <a href="{% url 'author_profile'  tweet.author.username %}">
+                    <div class="tweet-header">
+                        {{ tweet.author.first_name }}
+                        {{ tweet.author.last_name }}
+                        {{ tweet.created_at|date:"H:i j M, Y" }}
+                    </div>
                     </a>
+                    <a href="{% url 'tweet' tweet.id %}">
+                    <div class="tweet-content">
+                        {{ tweet.content }}
+                    </div>
+                    </a>
+                    <div class="tweet-actions">
+                        <a href="{% url 'like_tweet' tweet.id %}"><i class="fa-solid fa-heart fa-lg" style="color: #fa0000"> {{ tweet.like.count }}</i></a>
+                        <i class="fa-solid fa-comment fa-lg" style="color: #007bff"> {{ tweet.comment_count }}</i>
+                        <a href="{% url 'retweet' tweet.id %}"><i class="fa-solid fa-retweet fa-lg" style="color: #15f821"> {{ tweet.retweet_set.count }}</i></a>
+                    </div>
                 </div>
-
             {% endfor %}
         </div>
     </div>

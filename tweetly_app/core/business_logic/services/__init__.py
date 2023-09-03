@@ -6,6 +6,7 @@ from .tag import get_tags_by_country
 from .like import add_like_by_tweet
 from .retweet import retweet_tweet
 from .comment import comment_tweet
+from .follow import follow_user, unfollow_user, get_followings, get_followers
 
 
 __all__ = [
@@ -20,5 +21,9 @@ __all__ = [
     'get_tweets_by_tag',
     'add_like_by_tweet',
     'retweet_tweet',
-    'comment_tweet'
+    'comment_tweet',
+    'follow_user',
+    'unfollow_user',
+    'get_followers',
+    'get_followings'
 ]

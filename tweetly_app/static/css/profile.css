@@ -59,3 +59,28 @@ a {
     background-color: #003f83;
     border: #003f83;
 }
+
+
+
+.user-follow .unfollow,
+.user-follow .follow {
+    flex: 1;
+    margin-right: 10px;
+    display: inline-flex;
+}
+
+
+.user-follow .unfollow button {
+    background-color: #d9534f;
+    color: #fff;
+}
+
+.user-follow .follow button {
+    background-color:#007bff;;
+    color: #fff;
+}
+
+
+.user a {
+    font-weight:bold;
+}

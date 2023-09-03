@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import logging
 from typing import TYPE_CHECKING
 from core.business_logic.services import add_like_by_tweet
 from django.http import HttpResponse
