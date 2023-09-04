@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "tweetly-app"
+version = "0.1.0"
+description = ""
+authors = ["Siarhey Baradauka <borodavkasv111@gmail.com>"]
+readme = "README.md"
+packages = [{include = "tweetly_app"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+django = "4.2.3"
+pre-commit = "^3.3.3"
+python-dotenv = "^1.0.0"
+psycopg2-binary = "^2.9.7"
+dacite = "^1.8.1"
+pillow = "10.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
