@@ -5,15 +5,18 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('core', '0006_remove_tweetlike_like_tweetlike_user_and_more'),
+        ("core", "0006_remove_tweetlike_like_tweetlike_user_and_more"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='tweet',
-            name='retweets',
-            field=models.ManyToManyField(related_name='retweeted_tweets', through='core.Retweet', to=settings.AUTH_USER_MODEL),
+            model_name="tweet",
+            name="retweets",
+            field=models.ManyToManyField(
+                related_name="retweeted_tweets",
+                through="core.Retweet",
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
     ]

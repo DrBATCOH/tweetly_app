@@ -7,26 +7,25 @@ from .follower import Follower
 from .notification import Notification
 from .retweet import Retweet
 from .tag import Tag
+from .tweet import Tweet
 from .tweet_comment import TweetComment
 from .tweet_like import TweetLike
 from .tweet_tag import TweetTag
-from .tweet import Tweet
 from .user_notification import UserNotification
 
-
 __all__ = [
-    'Base',
-    'Comment',
-    'CountryModel',
-    'CustomUser',
-    'EmailConfirmationCodes',
-    'Follower',
-    'Notification',
-    'Retweet',
-    'Tag',
-    'TweetComment',
-    'TweetLike',
-    'TweetTag',
-    'Tweet',
-    'UserNotification'
+    "Base",
+    "Comment",
+    "CountryModel",
+    "CustomUser",
+    "EmailConfirmationCodes",
+    "Follower",
+    "Notification",
+    "Retweet",
+    "Tag",
+    "TweetComment",
+    "TweetLike",
+    "TweetTag",
+    "Tweet",
+    "UserNotification",
 ]

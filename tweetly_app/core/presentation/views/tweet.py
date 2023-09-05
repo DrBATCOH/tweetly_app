@@ -1,30 +1,34 @@
 from __future__ import annotations
+
 from typing import TYPE_CHECKING
 
-from django.http import HttpResponse
-from django.shortcuts import render, redirect
-from django.views.decorators.http import require_http_methods
 from django.contrib.auth.decorators import login_required
-
+from django.http import HttpResponse
+from django.shortcuts import redirect, render
+from django.views.decorators.http import require_http_methods
 
 if TYPE_CHECKING:
     from django.http import HttpRequest
 
-
-from core.presentation.converters import convert_data_from_form_to_dto
-from core.business_logic.services import create_tweet, get_tweet_by_id, get_tweets_by_tag
-from core.presentation.forms import TweetForm
-from core.business_logic.dto import TweetDTO, TagDTO
+from core.business_logic.dto import TagDTO, TweetDTO
+from core.business_logic.services import (
+    create_tweet,
+    get_tweet_by_id,
+    get_tweets_by_tag,
+)
 from core.models import Comment
+from core.presentation.converters import convert_data_from_form_to_dto
+from core.presentation.forms import TweetForm
 
 
 @require_http_methods(request_method_list=["GET", "POST"])
 @login_required
 def add_tweet(request: HttpRequest) -> HttpResponse:
-
     if request.method == "GET":
         form = TweetForm()
-        context = {"form": form, }
+        context = {
+            "form": form,
+        }
         return render(request=request, template_name="add_tweet.html", context=context)
     elif request.method == "POST":
         form = TweetForm(request.POST)

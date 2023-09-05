@@ -4,17 +4,16 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('core', '0003_tweet_tags'),
+        ("core", "0003_tweet_tags"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='tweet',
-            name='tags',
+            model_name="tweet",
+            name="tags",
         ),
         migrations.DeleteModel(
-            name='TweetRetweet',
+            name="TweetRetweet",
         ),
     ]

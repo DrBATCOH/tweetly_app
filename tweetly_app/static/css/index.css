@@ -24,7 +24,7 @@
         align-items: center;
         margin-top: 10px;
         margin-bottom: 5px;
-        padding: 16px;
+        padding: 14px;
         width: 10vw;
         border-radius: 28px;
         border: 0.2vw solid #007bff;
@@ -60,7 +60,7 @@
     background-color: rgba(255, 255, 255, 0.8);
     border: 0.2vw solid #ccc;
     border-radius: 2vw;
-    padding: 10px;
+    padding: 8px;
     margin: 0.2vw;
     margin-left: 31vw;
     max-width: 35%;
@@ -114,4 +114,9 @@ a {
 .pagination .next:hover{
     background-color: #003f83;
     border: #003f83;
+}
+
+
+.tweet .tags {
+    border-top: 1px solid #ccc;
 }

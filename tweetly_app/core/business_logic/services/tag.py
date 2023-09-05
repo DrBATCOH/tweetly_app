@@ -1,14 +1,6 @@
-from __future__ import annotations
-
-from typing import TYPE_CHECKING
-from django.utils import timezone
+from core.models import Tag
 from django.db.models import Count
-
-
-if TYPE_CHECKING:
-    from core.models import CustomUser
-
-from core.models import Tweet, CustomUser, Tag
+from django.utils import timezone
 
 
 def get_tags_by_country(country: str) -> list[Tag]:

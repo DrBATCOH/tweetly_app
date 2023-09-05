@@ -84,3 +84,7 @@ a {
 .user a {
     font-weight:bold;
 }
+
+.tweet .tags {
+    border-top: 1px solid #ccc;
+}

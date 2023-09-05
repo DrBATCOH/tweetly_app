@@ -41,4 +41,6 @@ class CustomPagination:
         else:
             prev_page = None
 
-        return PaginationResponse(data=data_paginated, next_page=next_page, prev_page=prev_page)
+        return PaginationResponse(
+            data=data_paginated, next_page=next_page, prev_page=prev_page
+        )

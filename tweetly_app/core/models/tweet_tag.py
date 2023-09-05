@@ -1,6 +1,6 @@
 from django.db import models
-from .base import Base
 
+from .base import Base
 
 
 class TweetTag(Base):

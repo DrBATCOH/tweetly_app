@@ -24,9 +24,11 @@
                 <div class="tweet">
                     <a href="{% url 'author_profile'  tweet.author.username %}">
                     <div class="tweet-header">
+                        <b>
                         {{ tweet.author.first_name }}
                         {{ tweet.author.last_name }}
                         {{ tweet.created_at|date:"H:i j M, Y" }}
+                        </b>
                     </div>
                     </a>
                     <a href="{% url 'tweet' tweet.id %}">
@@ -34,6 +36,13 @@
                         {{ tweet.content }}
                     </div>
                     </a>
+                    <div class="tags"> 
+                        {% for tag in tweet.tags.all %}
+                            <a href="{% url 'tweet_by_tag' tag.name %}">
+                            <i>#{{ tag }}</i>
+                            </a>
+                        {% endfor %}
+                    </div>
                     <div class="tweet-actions">
                         <a href="{% url 'like_tweet' tweet.id %}"><i class="fa-solid fa-heart fa-lg" style="color: #fa0000"> {{ tweet.like.count }}</i></a>
                         <i class="fa-solid fa-comment fa-lg" style="color: #007bff"> {{ tweet.comment_count }}</i>

@@ -1,14 +1,13 @@
 from .login import LoginDTO
 from .registration import RegistrationDTO
-from .tweet import TweetDTO, SearchTweetDTO
 from .tag import TagDTO, TweetTagDTO
-
+from .tweet import SearchTweetDTO, TweetDTO
 
 __all__ = [
-    'LoginDTO',
-    'RegistrationDTO',
-    'TweetDTO',
-    'SearchTweetDTO',
-    'TagDTO',
-    'TweetTagDTO',
+    "LoginDTO",
+    "RegistrationDTO",
+    "TagDTO",
+    "TweetDTO",
+    "SearchTweetDTO",
+    "TweetTagDTO",
 ]

@@ -1,9 +1,10 @@
 from __future__ import annotations
+
 import sys
-import uuid
 from io import BytesIO
-from PIL import Image
+
 from django.core.files.uploadedfile import InMemoryUploadedFile
+from PIL import Image
 
 
 def optimize_image(file: InMemoryUploadedFile) -> InMemoryUploadedFile:
@@ -18,5 +19,5 @@ def optimize_image(file: InMemoryUploadedFile) -> InMemoryUploadedFile:
         name=file.name,
         content_type=file.content_type,
         size=sys.getsizeof(output),
-        charset=file.charset
+        charset=file.charset,
     )

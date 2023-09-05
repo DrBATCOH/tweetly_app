@@ -27,7 +27,9 @@ def login_view(request: HttpRequest) -> HttpResponse:
     else:
         form = LoginForm(request.POST)
         if form.is_valid():
-            data = convert_data_from_form_to_dto(dto=LoginDTO, data_from_form=form.cleaned_data)
+            data = convert_data_from_form_to_dto(
+                dto=LoginDTO, data_from_form=form.cleaned_data
+            )
 
             try:
                 user = authenticate_user(data=data)
