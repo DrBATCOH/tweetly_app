@@ -1,17 +1,29 @@
 from __future__ import annotations
 
+import uuid
+import time
+
 from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
     from django.http import HttpRequest
+    from core.business_logic.dto import ProfileDTO
+    from core.models import CustomUser
 
-from core.models import Follower, Tweet
-from core.presentation.paginator import CustomPagination, PageNotExists
 from django.contrib.auth import get_user_model
 from django.db.models import Q
 from django.http import HttpResponseBadRequest
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
+from django.core.mail import send_mail
+from django.urls import reverse
+from core.models import EmailConfirmationCodes
+from django.conf import settings
+
+from core.models import Follower, Tweet
+from core.presentation.paginator import CustomPagination, PageNotExists
+from .common import optimize_image, replace_file_name_to_uuid
+from core.business_logic.exceptions import InvalidAuthCredentials
 
 
 def get_user_profile(user_profile: get_user_model, page_number: int) -> dict[Any, Any]:
@@ -64,3 +76,42 @@ def get_author_profile(request: HttpRequest, username: str) -> dict[Any, Any]:
         "prev_page": tweets_paginated.prev_page,
         "is_following": is_following,
     }
+
+
+def edit_user_profile(data: ProfileDTO, user: CustomUser) -> None:
+
+    user = get_user_model().objects.get(pk=user.id)
+    if data.avatar is not None:
+        file = replace_file_name_to_uuid(data.avatar)
+        file = optimize_image(file=file)
+        user.avatar = file
+    user.status = data.status
+    user.first_name = data.first_name
+    user.last_name = data.last_name
+    user.username = data.username
+    user.email = data.email
+    user.country = data.country
+    user.birthdate = data.birthdate
+    user.save()
+    if data.old_password and data.new_password:
+        if user.check_password(data.old_password):
+            user.set_password(data.new_password)
+        else:
+            raise InvalidAuthCredentials
+    if user.email != data.email:
+        user.is_active = False
+        confirmation_code = str(uuid.uuid4())
+        exp_time = int(time.time()) + settings.CONFIRMATION_CODE_LIFETIME
+        EmailConfirmationCodes.objects.create(
+            code=confirmation_code, user=user, expiration=exp_time
+        )
+
+        confirmation_url = (
+            settings.SERVER_HOST + reverse("confirm-singup") + f"?code={confirmation_code}"
+        )
+        send_mail(
+            subject="Confirn your email",
+            message=f"Please confirm email by clicking the link below:\n\n{confirmation_url}",
+            from_email=settings.EMAIL_FROM,
+            recipient_list=[data.email],
+        )

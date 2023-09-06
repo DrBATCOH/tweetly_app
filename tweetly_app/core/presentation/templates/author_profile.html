@@ -11,11 +11,12 @@
 <body>
 
     <div class="user">
-        {% if author.profile.avatar %}
-        <img src="{{ profile_data.profile.avatar.url }}">
+        {% if data.author.avatar %}
+        <img src="{{data.author.avatar.url }}">
         {% else %}
         <img src="{% static 'img/avatar.jpg' %}" width="100" height="100">
         {% endif %}
+        <p>{{ data.author.status }}</p>
         <p>{{ data.author.created_at|date:"H:i j M, Y" }}</p>
         <p>{{ data.author.first_name }} {{ data.author.last_name }}</p>
         <p>{{ data.author.username }}</p> 
@@ -45,7 +46,7 @@
             {% if data.is_online %}
             online
             {% else %}
-            was online {{ data.profile.last_login|timesince }} ago
+            was online {{ data.last_login|timesince }} ago
             {% endif %}
         </p>
     </div>

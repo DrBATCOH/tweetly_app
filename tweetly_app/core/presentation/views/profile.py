@@ -3,7 +3,6 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserChangeForm
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.views.decorators.http import require_http_methods
@@ -11,7 +10,10 @@ from django.views.decorators.http import require_http_methods
 if TYPE_CHECKING:
     from django.http import HttpRequest
 
-from core.business_logic.services import get_author_profile, get_user_profile
+from core.business_logic.services import get_author_profile, get_user_profile, edit_user_profile
+from core.presentation.forms import EditProfileForm
+from core.presentation.converters import convert_data_from_form_to_dto
+from core.business_logic.dto import ProfileDTO
 
 
 @require_http_methods(request_method_list=["GET", "POST"])
@@ -36,13 +38,30 @@ def author_profile(request: HttpRequest, username: str) -> HttpResponse:
     return render(request=request, template_name="author_profile.html", context=context)
 
 
-def edit_profile(request):
-    if request.method == "POST":
-        form = UserChangeForm(request.POST, instance=request.user)
-        if form.is_valid():
-            form.save()
-            return redirect("profile")
-    else:
-        form = UserChangeForm(instance=request.user)
+@require_http_methods(request_method_list=["GET", "POST"])
+def edit_profile(request: HttpRequest) -> HttpResponse:
+    user = request.user
+    user_data = {
+        "first_name": request.user.first_name,
+        "last_name": request.user.last_name,
+        "username": request.user.username,
+        "email": request.user.email,
+        "birthdate": request.user.birthdate,
+        "status": request.user.status,
+        "old_email": request.user.email,
+        "country": request.user.country
+    }
 
-    return render(request, "edit_profile.html", {"form": form})
+    if request.method == "GET":
+        form = EditProfileForm(user_data)
+        context = {"form": form}
+        return render(request=request, template_name="edit_profile.html", context=context)
+    if request.method == "POST":
+        form = EditProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            data = convert_data_from_form_to_dto(ProfileDTO, form.cleaned_data)
+            edit_user_profile(data=data, user=user)
+            return redirect(to="profile")
+        else:
+            context = {"form": form}
+            return render(request, "edit_profile.html", context)

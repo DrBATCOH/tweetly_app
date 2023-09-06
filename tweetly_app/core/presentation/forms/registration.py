@@ -42,7 +42,5 @@ class RegistrationForm(forms.Form):
         label=False,
         required=True,
         validators=[AgeValidator(min_age=18)],
-        widget=forms.SelectDateWidget(years=range(1960, 2023)),
+        widget=forms.SelectDateWidget(years=range(1940, 2023)),
     )
-
-    # birthdate = forms.DateField(label=False, required=True, widget=forms.SelectDateWidget(years=range(1970, 2005)))

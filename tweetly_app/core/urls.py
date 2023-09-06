@@ -19,6 +19,7 @@ from core.presentation.views import (
     tweet_by_tag,
     unfollow,
     user_profile,
+    edit_profile
 )
 from django.urls import path
 
@@ -43,4 +44,5 @@ urlpatterns = [
     path("unfollow/<str:username>/", unfollow, name="unfollow"),
     path("followers/", all_follower, name="follower"),
     path("following/", all_following, name="following"),
+    path("edit/", edit_profile, name="edit_profile"),
 ]

@@ -3,11 +3,12 @@ from .follow import follow_user, get_followers, get_followings, unfollow_user
 from .like import add_like_by_tweet
 from .login import authenticate_user
 from .notification import create_notification, get_notification
-from .profile import get_author_profile, get_user_profile
+from .profile import get_author_profile, get_user_profile, edit_user_profile
 from .registration import confirm_user_registration, create_user
 from .replace_swear_word import replace_swear_word_in_text
 from .retweet import retweet_tweet
 from .tag import get_tags_by_country
+from .common import replace_file_name_to_uuid, optimize_image
 from .tweet import (
     calculate_comment_counts,
     create_tweet,
@@ -38,4 +39,7 @@ __all__ = [
     "retweet_tweet",
     "search_tweet",
     "unfollow_user",
+    "replace_file_name_to_uuid",
+    "optimize_image",
+    "edit_user_profile"
 ]
