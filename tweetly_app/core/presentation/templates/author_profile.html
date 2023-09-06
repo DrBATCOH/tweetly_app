@@ -12,43 +12,30 @@
 
     <div class="user">
         {% if data.author.avatar %}
-        <img src="{{data.author.avatar.url }}">
+            <img src="{{ data.author.avatar.url }}">
         {% else %}
-        <img src="{% static 'img/avatar.jpg' %}" width="100" height="100">
+            <img src="{% static 'img/avatar.jpg' %}" width="200" height="200">
         {% endif %}
-        <p>{{ data.author.status }}</p>
-        <p>{{ data.author.created_at|date:"H:i j M, Y" }}</p>
-        <p>{{ data.author.first_name }} {{ data.author.last_name }}</p>
-        <p>{{ data.author.username }}</p> 
-        <p>{{ data.author.email }}</p>
-        <a href="{% url 'follower' %}"> Follower {{ data.author.follower.count }} </a>
-        <a href="{% url 'following' %}"> Following {{ data.author.following.count }} </a>
-            
-        
-        <div class="user-follow">
-            <div class="follow">
-                <form method="post" action="{% url 'follow' data.author.username %}">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-primary">Follow</button>
-                </form>
+        <div class="user-info">
+            <div class="is-online">
+                {% if data.author.is_online %}
+                <p style="color: green;">online</p>
+                {% else %}
+                <p style="color: rgb(128, 0, 0);">was online {{ data.author.last_login|timesince }} ago </p>
+                {% endif %}
             </div>
-            <div class="unfollow">
-                <form method="post" action="{% url 'unfollow' data.author.username %}">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-danger">Unfollow</button>
-                </form>
+            
+            <div class="username">{{ data.author.first_name }} {{ data.author.last_name }}</div> 
+            <div class="status">{{ data.author.status }}</div> 
+            <div class="birthdate">{{ data.author.birthdate }}</div>
+            <div class="nickname">{{ data.author.username }}</div>
+            <div class="email">{{ data.author.email }}</div>
+            <div class="created-date">{{ data.author.created_at|date:"H:i j M, Y" }}</div>                
+            <div class="follower-following">
+                <a href="{% url 'follower' %}"> Follower {{ data.author.follower.count }} </a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="{% url 'following' %}"> Following {{ data.author.following.count }} </a>
             </div>
         </div>
-       
-        
-        
-        <p style="color: green;">
-            {% if data.is_online %}
-            online
-            {% else %}
-            was online {{ data.last_login|timesince }} ago
-            {% endif %}
-        </p>
     </div>
     <div class="tweet-form">
         <div class="tweet-container" id="tweet-container">

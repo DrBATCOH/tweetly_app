@@ -11,7 +11,7 @@ class EditProfileForm(forms.Form):
         allow_empty_file=False,
         required=False,
         validators=[ValidateFileExtension(["png", "jpeg", "jpg"]), ValidateFileSize(max_size=5_000_000)],
-        widget=forms.FileInput(attrs={"class": "form-control", "placeholder": "avatar"}))
+        widget=forms.FileInput(attrs={"placeholder": "avatar"}))
     status = forms.CharField(
         label=False,
         max_length=100,

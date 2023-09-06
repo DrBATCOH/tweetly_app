@@ -1,5 +1,5 @@
-<!-- {% extends "base.html" %} -->
-<!-- {% block content %} -->
+{% extends "base.html" %}
+{% block content %}
 {% load static %}
 <html>
     <head>
@@ -15,7 +15,19 @@
             {% endif %}
             <form method="POST", action="{% url 'edit_profile' %}" enctype="multipart/form-data">
                 {% csrf_token %}
-                {{ form.as_p }}
+                {{ form.avatar }}<br>
+                {{ form.first_name }}<br>
+                {{ form.last_name }}<br>
+                {{ form.status }}<br>
+                {{ form.username }}<br>
+                {{ form.old_password }}<br>
+                {{ form.new_password }}<br>
+                <div class="country-fields">
+                    {{ form.country }}<br>
+                </div>
+                <div class="birthdate-fields">
+                    {{ form.birthdate }}<br>
+                </div>
                 <button type="submit">SAVE</button>
             </form>
         </div>
@@ -24,6 +36,4 @@
     
     </html>
 
-<!-- {% endblock %} -->
-
-
+{% endblock %}

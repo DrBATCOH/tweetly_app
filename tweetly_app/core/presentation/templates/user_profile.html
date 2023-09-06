@@ -11,28 +11,33 @@
 <body>
 
     <div class="user">
-        {% if user.avatar %}
-        <img src="{{ user.avatar.url }}">
-        {% else %}
-        <img src="{% static 'img/avatar.jpg' %}" width="200" height="200">
-        {% endif %}
-        <a href="{% url 'edit_profile' %}">Edit profile</a>
-        <p>{{ user.status }}</p>
-        <p>{{ user.created_at|date:"H:i j M, Y" }}</p>
-        <p>{{ user.first_name }} {{ user.last_name }}</p>
-        <p>@{{ user.username }}</p> 
-        <p>{{ user.email }}</p>
-        <a href="{% url 'follower' %}"> Follower {{ user.follower.count }} </a>
-        <a href="{% url 'following' %}"> Following {{ user.following.count }} </a>
-            
         
-        <p style="color: green;">
-            {% if data.is_online %}
-            online
-            {% else %}
-            was online {{ user.profile.last_login|timesince }} ago
-            {% endif %}
-        </p>
+        {% if user.avatar %}
+            <img src="{{ user.avatar.url }}">
+        {% else %}
+            <img src="{% static 'img/avatar.jpg' %}" width="200" height="200">
+        {% endif %}
+        <div class="user-info">
+            <div class="is-online">
+                {% if data.is_online %}
+                <p style="color: green;">online</p>
+                {% else %}
+                <p style="color: rgb(128, 0, 0);">was online {{ user.last_login|timesince }} ago </p>
+                {% endif %}
+            </div>
+            
+            <div class="username">{{ user.first_name }} {{ user.last_name }}</div> 
+            <div class="status">{{ user.status }}</div> 
+            <div class="birthdate">{{ user.birthdate }}</div>
+            <div class="nickname">{{ user.username }}</div>
+            <div class="email">{{ user.email }}</div>
+            <div class="created-date">{{ user.created_at|date:"H:i j M, Y" }}</div>                
+            <div class="follower-following">
+                <a href="{% url 'follower' %}"> Follower {{ user.follower.count }} </a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="{% url 'following' %}"> Following {{ user.following.count }} </a>
+            </div>
+        </div>
+        <div class="edit"><a href="{% url 'edit_profile' %}">Edit profile</a></div>
     </div>
     <div class="tweet-form">
         <div class="tweet-container" id="tweet-container">
