@@ -70,3 +70,38 @@ a {
     background-color: #003f83;
     border:  #003f83;
 }
+
+.tweet-header img {
+    border-radius: 50%;
+}
+
+/* Стиль для обертки .comment */
+.comment {
+    border: 1px solid #ccc; /* Граничная линия */
+    padding: 10px; /* Отступ внутри обертки */
+    margin-top: 20px; /* Верхний отступ между комментариями и содержимым выше */
+}
+
+/* Стиль для каждого комментария .comment-item */
+.comment-item {
+    border: 1px solid #ddd; /* Граничная линия для каждого комментария */
+    padding: 10px; /* Отступ внутри комментария */
+    margin-bottom: 10px; /* Нижний отступ между комментариями */
+}
+
+/* Стиль для текста Comment by */
+.comment-item p:first-child {
+    font-weight: bold; /* Жирный текст для "Comment by" */
+    margin-bottom: 5px; /* Нижний отступ после имени пользователя */
+}
+
+/* Стиль для даты */
+.comment-item p:nth-child(2) {
+    font-size: 12px; /* Уменьшенный размер шрифта для даты */
+    color: #888; /* Серый цвет для даты */
+}
+
+/* Стиль для текста комментария */
+.comment-item p:last-child {
+    margin-top: 10px; /* Верхний отступ перед текстом комментария */
+}

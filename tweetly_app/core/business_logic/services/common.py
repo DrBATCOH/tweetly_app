@@ -16,7 +16,7 @@ def optimize_image(file: InMemoryUploadedFile) -> InMemoryUploadedFile:
     format = file.content_type.split("/")[-1].upper()
     output = BytesIO()
     with Image.open(file) as image:
-        image.thumbnail(size=(200, 200))
+        image.thumbnail(size=(300, 300))
         image.save(output, format=format, qulity=100)
     return InMemoryUploadedFile(
         file=output,

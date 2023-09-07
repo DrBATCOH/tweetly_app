@@ -30,41 +30,60 @@
             <div class="birthdate">{{ data.author.birthdate }}</div>
             <div class="nickname">{{ data.author.username }}</div>
             <div class="email">{{ data.author.email }}</div>
-            <div class="created-date">{{ data.author.created_at|date:"H:i j M, Y" }}</div>                
+            <div class="created-date">{{ data.author.created_at|date:"j M, Y H:i" }}</div>                
             <div class="follower-following">
                 <a href="{% url 'follower' %}"> Follower {{ data.author.follower.count }} </a>&nbsp;&nbsp;&nbsp;&nbsp;
                 <a href="{% url 'following' %}"> Following {{ data.author.following.count }} </a>
             </div>
-        </div>
-    </div>
-    <div class="tweet-form">
-        <div class="tweet-container" id="tweet-container">
-            {% for tweet in data.paginated %}
-            <div class="tweet">
-                <div class="tweet-header">
-                    {% if tweet.retweet_set.exists and data.author.username != tweet.author.username %}
-                    <b>Retweeted from</b>
-                    {{ tweet }}
-                    {{ tweet.created_at|date:"H:i j M, Y" }}
-                    {% else %}
-                    {{ tweet.author.first_name }}
-                    {{ tweet.author.last_name }}
-                    {{ tweet.created_at|date:"H:i j M, Y" }}
-                    {% endif %}
-                </div>
-                <a href="{% url 'tweet' tweet.id %}">
-                    <div class="tweet-content">
-                        {{ tweet.content }}
+                 {% if data.is_following %}
+                    <div class="unfollow">
+                        <form method="post" action="{% url 'unfollow' data.author.username %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Unfollow</button>
+                        </form>
                     </div>
-                </a>
+                {% else %}
+                    <div class="follow">
+                        <form method="post" action="{% url 'follow' data.author.username %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary">Follow</button>
+                        </form>
+                    </div>
+                {% endif %}
+            </div> 
+            
+    </div>
+        <div class="tweet-form">
+            <div class="tweet-container" id="tweet-container">
+                {% for tweet in data.paginated %}
+                <div class="tweet">
+                    <div class="tweet-header">
+                        {% if tweet.retweet_set.exists and data.author.username != tweet.author.username %}
+                        <b>Retweeted from</b>
+                        {{ tweet }}
+                        @{{ tweet.author.username}}
+                        {{ tweet.created_at|date:"j M, Y H:i" }}
+                        {% else %}
+                        {% if tweet.author.avatar %}
+                            <img src="{{ tweet.author.avatar.url }}" width="30" height="30">
+                        {% else %}
+                            <img src="{% static 'img/avatar.jpg' %}" width="30" height="30">
+                        {% endif %}
+                        {{ tweet.author.first_name }}
+                        {{ tweet.author.last_name }}
+                        @{{ tweet.author.username}}
+                        {{ tweet.created_at|date:"j M, Y H:i" }}
+                        {% endif %}
+                    </div>
+                    <a href="{% url 'tweet' tweet.id %}">
+                        <div class="tweet-content">
+                            {{ tweet.content }}
+                        </div>
+                    </a>
                 <div class="tweet-actions">
-                    <a href="{% url 'like_tweet' tweet.id %}">
-                        <i class="fa-solid fa-heart fa-lg" style="color: #fa0000"> {{ tweet.like.count }}</i>
-                    </a>
-                    <i class="fa-solid fa-comment fa-lg" style="color: #007bff"> {{ tweet.tweetcomment_set.all|length }}</i>
-                    <a href="{% url 'retweet' tweet.id %}">
-                        <i class="fa-solid fa-retweet fa-lg" style="color: #15f821"> {{ tweet.retweet_set.count }}</i>
-                    </a>
+                    <a href="{% url 'like_tweet' tweet.id %}"><i class="fa-solid fa-heart fa-lg" style="color: #fa0000"> {{ tweet.like.count }}</i></a>
+                    <a href= "{% url 'tweet' tweet.id %}"><i class="fa-solid fa-comment fa-lg" style="color: #007bff"> {{ tweet.tweetcomment_set.all|length }}</i></a>
+                    <a href="{% url 'retweet' tweet.id %}"><i class="fa-solid fa-retweet fa-lg" style="color: #15f821"> {{ tweet.retweet_set.count }}</i></a>
                 </div>
             </div>
             {% endfor %}

@@ -1,5 +1,5 @@
 from .comment import comment_tweet
-from .follow import follow_user, get_followers, get_followings, unfollow_user
+from .follow import follow_user, get_followers, get_followings, unfollow_user, get_possible_follower
 from .like import add_like_by_tweet
 from .login import authenticate_user
 from .notification import create_notification, get_notification
@@ -41,5 +41,6 @@ __all__ = [
     "unfollow_user",
     "replace_file_name_to_uuid",
     "optimize_image",
-    "edit_user_profile"
+    "edit_user_profile",
+    "get_possible_follower"
 ]

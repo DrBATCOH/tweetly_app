@@ -22,12 +22,22 @@
         <div class="tweet-container" id="tweet-container">
             {% for tweet in tweets %}
                 <div class="tweet">
-                    <a href="{% url 'author_profile'  tweet.author.username %}">
+                    {% if tweet.author.username == user.username %}
+                        <a href="{% url 'profile' %}">
+                    {% else %}
+                        <a href="{% url 'author_profile' tweet.author.username %}">
+                    {% endif %}
                     <div class="tweet-header">
+                        {% if tweet.author.avatar %}
+                            <img src="{{ tweet.author.avatar.url }}" width="30" height="30">
+                        {% else %}
+                            <img src="{% static 'img/avatar.jpg' %}" width="30" height="30">
+                        {% endif %}
                         <b>
                         {{ tweet.author.first_name }}
                         {{ tweet.author.last_name }}
-                        {{ tweet.created_at|date:"H:i j M, Y" }}
+                        @{{ tweet.author.username}}
+                        {{ tweet.created_at|date:"j M, Y H:i" }}
                         </b>
                     </div>
                     </a>
@@ -45,7 +55,7 @@
                     </div>
                     <div class="tweet-actions">
                         <a href="{% url 'like_tweet' tweet.id %}"><i class="fa-solid fa-heart fa-lg" style="color: #fa0000"> {{ tweet.like.count }}</i></a>
-                        <i class="fa-solid fa-comment fa-lg" style="color: #007bff"> {{ tweet.comment_count }}</i>
+                        <a href= "{% url 'tweet' tweet.id %}"><i class="fa-solid fa-comment fa-lg" style="color: #007bff"> {{ tweet.comment_count }}</i></a>
                         <a href="{% url 'retweet' tweet.id %}"><i class="fa-solid fa-retweet fa-lg" style="color: #15f821"> {{ tweet.retweet_set.count }}</i></a>
                     </div>
                 </div>

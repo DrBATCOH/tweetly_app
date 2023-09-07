@@ -4,14 +4,14 @@ from django import forms
 class TweetForm(forms.Form):
     content = forms.CharField(
         label=False,
-        widget=forms.Textarea(
-            attrs={"rows": 3, "cols": 40, "placeholder": "Enter text"}
+        widget=forms.TextInput(
+            attrs={"placeholder": "Enter text"}
         ),
         max_length=150,
     )
     tags = forms.CharField(
         label=False,
-        widget=forms.Textarea(attrs={"rows": 2, "cols": 10, "placeholder": "Tags"}),
+        widget=forms.TextInput(attrs={"placeholder": "Tags"}),
         max_length=150,
         required=False,
     )

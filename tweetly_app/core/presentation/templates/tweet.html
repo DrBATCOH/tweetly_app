@@ -11,9 +11,15 @@
     <body>
         <div class="tweet">
             <div class="tweet-header">
+                {% if tweet.author.avatar %}
+                    <img src="{{ tweet.author.avatar.url }}" width="30" height="30">
+                {% else %}
+                    <img src="{% static 'img/avatar.jpg' %}" width="30" height="30">
+                {% endif %}
                 {{ tweet.author.first_name }}
                 {{ tweet.author.last_name }}
-                {{ tweet.created_at|date:"H:i j M, Y" }}
+                @{{ tweet.author.username}}
+                {{ tweet.created_at|date:"j M, Y H:i" }}
             </div>
             <a href="{% url 'tweet' tweet.id %}">
                 <div class="tweet-content">
@@ -21,14 +27,18 @@
                 </div>
             </a>
             <div class="tweet-actions">
-                <a href="{% url 'like_tweet' tweet.id %}">
-                    <i class="fa-solid fa-heart fa-lg" style="color: #fa0000"> {{ tweet.like.count }}</i>
-                </a>
-                <a href= "{% url 'comment' tweet.id %}">
-                <i class="fa-solid fa-comment fa-lg" style="color: #007bff"> {{ tweet.comment_count }}</i>
-                </a>
-                <i class="fa-solid fa-retweet fa-lg" style="color: #15f821"> {{ tweet.retweet_set.count }}</i>
+                <a href="{% url 'like_tweet' tweet.id %}"><i class="fa-solid fa-heart fa-lg" style="color: #fa0000"> {{ tweet.like.count }}</i></a>
+                <a href= "{% url 'tweet' tweet.id %}"><i class="fa-solid fa-comment fa-lg" style="color: #007bff"> {{ tweet.comment_count }}</i></a>
+                <a href="{% url 'retweet' tweet.id %}"><i class="fa-solid fa-retweet fa-lg" style="color: #15f821"> {{ tweet.retweet_set.count }}</i></a>
             </div>
+        </div>
+        <div class="comment-form">
+            <form method="post" >
+                {% csrf_token %}
+                <div class="comment-content"></div>
+                    {{ form.comment }}
+                <button type="submit">Comment</button>
+            </form>
         </div>
         <div class="comment">
             {% for comment in tweet.comments.all %}

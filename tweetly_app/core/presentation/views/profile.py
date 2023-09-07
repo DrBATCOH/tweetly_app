@@ -16,8 +16,8 @@ from core.presentation.converters import convert_data_from_form_to_dto
 from core.business_logic.dto import ProfileDTO
 
 
-@require_http_methods(request_method_list=["GET", "POST"])
 @login_required
+@require_http_methods(request_method_list=["GET"])
 def user_profile(request: HttpRequest) -> HttpResponse:
     user = request.user
     user_data = get_user_profile(
@@ -29,8 +29,8 @@ def user_profile(request: HttpRequest) -> HttpResponse:
     return render(request=request, template_name="user_profile.html", context=context)
 
 
-@require_http_methods(request_method_list=["GET", "POST"])
 @login_required
+@require_http_methods(request_method_list=["GET"])
 def author_profile(request: HttpRequest, username: str) -> HttpResponse:
     author_data = get_author_profile(request=request, username=username)
     context = {"data": author_data}
@@ -38,6 +38,7 @@ def author_profile(request: HttpRequest, username: str) -> HttpResponse:
     return render(request=request, template_name="author_profile.html", context=context)
 
 
+@login_required
 @require_http_methods(request_method_list=["GET", "POST"])
 def edit_profile(request: HttpRequest) -> HttpResponse:
     user = request.user

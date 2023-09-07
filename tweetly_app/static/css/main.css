@@ -85,3 +85,28 @@ aside ul a {
 .left-panel button:hover{
     background-color: #003f83;
 }
+
+
+
+.right-panel {
+    background: #fff;
+    width: 33%; 
+    padding-right: 6vw;
+    height: 100vh;
+    text-align: left;
+}
+
+
+.right-panel h3 {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    text-align: center;
+    
+}
+
+.uuser {
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    padding: 5px;
+    margin-bottom: 5px; 
+}

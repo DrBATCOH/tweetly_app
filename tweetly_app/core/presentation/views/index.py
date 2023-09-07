@@ -30,7 +30,7 @@ def index(request: HttpRequest) -> HttpResponse:
         calculate_comment_counts(tweets)
 
         page_number = request.GET.get("page", 1)
-        paginator = CustomPagination(per_page=6)
+        paginator = CustomPagination(per_page=5)
 
         try:
             tweets_paginated = paginator.paginate(data=tweets, page_number=page_number)

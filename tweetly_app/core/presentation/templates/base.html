@@ -29,7 +29,12 @@
             </aside>
             <div class="right-panel">
                 <ul>
-                    <h3> possible followers</h3>
+                    <h3>Possible followers</h3>
+                    <div class="poss_user">
+                    {% for u in all_users %}
+                        <div class="uuser"><a href="{% url 'author_profile' u.username %}">{{ u.first_name }} {{ u.last_name }} @{{ u.username }}</a></div>
+                    {% endfor %}
+                    </div>
                 </ul>
             </div>
                     

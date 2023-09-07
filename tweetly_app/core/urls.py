@@ -1,5 +1,4 @@
 from core.presentation.views import (
-    add_comment,
     add_tweet,
     all_follower,
     all_following,
@@ -7,7 +6,7 @@ from core.presentation.views import (
     confirmation_email_stub,
     follow,
     get_populate_tag_by_country,
-    get_tweet,
+    get_tweet_whit_comment,
     index,
     like_tweet,
     login_view,
@@ -21,6 +20,8 @@ from core.presentation.views import (
     user_profile,
     edit_profile
 )
+
+
 from django.urls import path
 
 urlpatterns = [
@@ -34,12 +35,11 @@ urlpatterns = [
     path("singup/", singup, name="singup"),
     path("confirmation/", singup_confirmation, name="confirm-singup"),
     path("confir/note/", confirmation_email_stub, name="confirm-stub"),
-    path("tweet_list/<int:tweet_id>", get_tweet, name="tweet"),
+    path("tweet_list/<int:tweet_id>", get_tweet_whit_comment, name="tweet"),
     path("add_tweet", add_tweet, name="add_tweet"),
     path("tweet_by_tag/<str:tag_name>/", tweet_by_tag, name="tweet_by_tag"),
     path("like/<int:tweet_id>/", like_tweet, name="like_tweet"),
     path("retweet/<int:tweet_id>/", make_retweet, name="retweet"),
-    path("tweet/<int:tweet_id>/", add_comment, name="comment"),
     path("follow/<str:username>/", follow, name="follow"),
     path("unfollow/<str:username>/", unfollow, name="unfollow"),
     path("followers/", all_follower, name="follower"),

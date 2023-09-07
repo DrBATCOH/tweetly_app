@@ -7,6 +7,7 @@ from core.business_logic.services import (
     get_followers,
     get_followings,
     unfollow_user,
+    get_possible_follower
 )
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
@@ -43,3 +44,13 @@ def all_following(request: HttpRequest) -> HttpResponse:
     followings = get_followings(user=user.username)
     context = {"followings": followings}
     return render(request=request, template_name="all_following.html", context=context)
+
+
+def possible_followers(request: HttpRequest) -> dict:
+    if request.user.is_authenticated:
+        user = request.user
+        country = user.country
+        all_users = get_possible_follower(country=country)
+    else:
+        all_users = []
+    return {'all_users': all_users}

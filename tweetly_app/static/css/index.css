@@ -120,3 +120,6 @@ a {
 .tweet .tags {
     border-top: 1px solid #ccc;
 }
+.tweet-header img {
+    border-radius: 50%;
+}

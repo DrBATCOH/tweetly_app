@@ -29,11 +29,8 @@ from core.business_logic.exceptions import InvalidAuthCredentials
 def get_user_profile(user_profile: get_user_model, page_number: int) -> dict[Any, Any]:
     last_login = user_profile.last_login
     is_online = (timezone.now() - last_login).seconds > 120
-    tweets = Tweet.objects.filter(
-        Q(author=user_profile) | Q(retweet__user=user_profile)
-    ).order_by("-created_at")
+    tweets = Tweet.objects.filter(Q(author=user_profile) | Q(retweet__user=user_profile)).distinct().order_by("-created_at")
     paginator = CustomPagination(per_page=4)
-
     try:
         tweets_paginated = paginator.paginate(data=tweets, page_number=page_number)
     except PageNotExists:
@@ -50,19 +47,15 @@ def get_user_profile(user_profile: get_user_model, page_number: int) -> dict[Any
 def get_author_profile(request: HttpRequest, username: str) -> dict[Any, Any]:
     author = get_object_or_404(get_user_model(), username=username)
     last_login = author.last_login
-    is_online = (timezone.now() - last_login).seconds > 300
-    tweets = Tweet.objects.filter(Q(author=author) | Q(retweet__user=author)).order_by(
-        "-created_at"
-    )
+    is_online = (last_login - timezone.now()).seconds < 120
+    tweets = Tweet.objects.filter(Q(author=author) | Q(retweet__user=author)).distinct().order_by("-created_at")
     page_number = request.GET.get("page", 1)
     paginator = CustomPagination(per_page=4)
     is_following = False
 
     if request.user.is_authenticated:
-        is_following = Follower.objects.filter(
-            follower=author, following=request.user
-        ).exists()
-
+        is_following = Follower.objects.select_related('follower', 'following').filter(
+            follower=request.user, following=author).exists()
     try:
         tweets_paginated = paginator.paginate(data=tweets, page_number=page_number)
     except PageNotExists:

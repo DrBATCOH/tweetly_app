@@ -6,13 +6,12 @@ from django.db import transaction
 from django.db.models import Count, Q
 
 if TYPE_CHECKING:
-    from core.business_logic.dto import TweetDTO, SearchTweetDTO, TagDTO
+    from core.business_logic.dto import TweetDTO, SearchTweetDTO
     from core.models import CustomUser
 
-from core.business_logic.dto import TweetTagDTO
+
 from core.business_logic.exceptions import TweetNotFound
 from core.models import Comment, Tag, Tweet
-
 from .replace_swear_word import replace_swear_word_in_text
 
 
@@ -62,21 +61,19 @@ def search_tweet(data: SearchTweetDTO) -> list[Tweet]:
     return list(tweets)
 
 
-def get_tweets_by_tag(data: TagDTO) -> TweetTagDTO:
-    tag = Tag.objects.get(name=data.name)
-    tweets = (
-        Tweet.objects.filter(tags=tag)
-        .select_related("author")
-        .annotate(
-            like_count=Count("like"),
-            retweet_count=Count("retweet"),
-            comment_count=Count("comments"),
-        )
+def get_tweets_by_tag(tag_name: str) -> list[Tweet]:
+    tag = Tag.objects.get(name=tag_name)
+    tweet = (Tweet.objects.filter(tags=tag)
+             .select_related("author")
+             .annotate(
+                 like_count=Count("like"),
+                 retweet_count=Count("retweet"),
+                 comment_count=Count("comments"),
+    )
         .prefetch_related("like", "comments")
         .order_by("-created_at")
     )
-    tag_tweet = TweetTagDTO(tag=tag, tweets=tweets)
-    return tag_tweet
+    return tweet
 
 
 def calculate_comment_counts(tweets):

@@ -22,13 +22,7 @@ class Tweet(Base):
     )
 
     def __str__(self):
-        retweet = self.retweets.first()
-
-        if retweet:
-            retweeted_user = self.author
-            return f"{retweeted_user.first_name} {retweeted_user.last_name} "
-        else:
-            return f"{self.author.first_name} {self.author.last_name}"
+        return f"{self.author.first_name} {self.author.last_name}"
 
     class Meta:
         db_table = "tweets"

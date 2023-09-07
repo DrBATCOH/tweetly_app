@@ -32,3 +32,8 @@ def get_followings(user: CustomUser):
     user = get_user_model().objects.get(username=user)
     following = user.following.all()
     return following
+
+
+def get_possible_follower(country: str) -> list[Follower]:
+    possible_follower = CustomUser.objects.filter(country=country)
+    return possible_follower

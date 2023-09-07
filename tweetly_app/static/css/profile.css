@@ -9,7 +9,7 @@
 
 
 .user img {
-    width: 200px;
+    width: 220px;
     height: 200px;
     border-radius: 30%;
     margin-right: 20px;
@@ -34,8 +34,10 @@
 }
 
 .edit {
-    margin-left: 10vw;
+    margin-left: 9vw;
 }
+
+
 
 
 .tweet {
@@ -101,30 +103,13 @@ a {
 }
 
 
-
-.user-follow .unfollow,
-.user-follow .follow {
-    flex: 1;
-    margin-right: 10px;
-    display: inline-flex;
-}
-
-
-.user-follow .unfollow button {
-    background-color: #d9534f;
-    color: #fff;
-}
-
-.user-follow .follow button {
-    background-color:#007bff;;
-    color: #fff;
-}
-
-
 .user a {
     font-weight:bold;
 }
 
 .tweet .tags {
     border-top: 1px solid #ccc;
+}
+.tweet-header img {
+    border-radius: 50%;
 }
