@@ -10,14 +10,12 @@ from core.business_logic.services import calculate_comment_counts, search_tweet
 from core.presentation.converters import convert_data_from_form_to_dto
 from core.presentation.forms import SearchTweetForm
 from core.presentation.paginator import CustomPagination, PageNotExists
-from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 
 
 @require_http_methods(request_method_list=["GET"])
-@login_required
 def index(request: HttpRequest) -> HttpResponse:
     form = SearchTweetForm(request.GET)
 

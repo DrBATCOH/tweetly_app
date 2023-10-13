@@ -34,6 +34,7 @@
                     {% for u in all_users %}
                         <div class="uuser"><a href="{% url 'author_profile' u.username %}">{{ u.first_name }} {{ u.last_name }} @{{ u.username }}</a></div>
                     {% endfor %}
+
                     </div>
                 </ul>
             </div>

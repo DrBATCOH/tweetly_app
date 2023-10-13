@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from django.contrib.auth.decorators import login_required
+
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.views.decorators.http import require_http_methods
@@ -16,7 +16,6 @@ from core.presentation.converters import convert_data_from_form_to_dto
 from core.business_logic.dto import ProfileDTO
 
 
-@login_required
 @require_http_methods(request_method_list=["GET"])
 def user_profile(request: HttpRequest) -> HttpResponse:
     user = request.user
@@ -29,7 +28,6 @@ def user_profile(request: HttpRequest) -> HttpResponse:
     return render(request=request, template_name="user_profile.html", context=context)
 
 
-@login_required
 @require_http_methods(request_method_list=["GET"])
 def author_profile(request: HttpRequest, username: str) -> HttpResponse:
     author_data = get_author_profile(request=request, username=username)
@@ -38,7 +36,6 @@ def author_profile(request: HttpRequest, username: str) -> HttpResponse:
     return render(request=request, template_name="author_profile.html", context=context)
 
 
-@login_required
 @require_http_methods(request_method_list=["GET", "POST"])
 def edit_profile(request: HttpRequest) -> HttpResponse:
     user = request.user

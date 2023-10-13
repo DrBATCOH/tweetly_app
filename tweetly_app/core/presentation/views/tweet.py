@@ -1,8 +1,6 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
-
-from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import redirect, render
 from django.views.decorators.http import require_http_methods
@@ -24,7 +22,6 @@ from core.presentation.paginator import CustomPagination, PageNotExists
 
 
 @require_http_methods(request_method_list=["GET", "POST"])
-@login_required
 def add_tweet(request: HttpRequest) -> HttpResponse:
     if request.method == "GET":
         form = TweetForm()
@@ -43,7 +40,6 @@ def add_tweet(request: HttpRequest) -> HttpResponse:
     return render(request, template_name="comment.html", context=context)
 
 
-@login_required
 @require_http_methods(request_method_list=["GET", "POST"])
 def get_tweet_whit_comment(request: HttpRequest, tweet_id: int) -> HttpResponse:
     user = request.user
@@ -63,7 +59,6 @@ def get_tweet_whit_comment(request: HttpRequest, tweet_id: int) -> HttpResponse:
     return render(request=request, template_name="tweet.html", context=context)
 
 
-@login_required
 @require_http_methods(request_method_list=["GET"])
 def tweet_by_tag(request: HttpRequest, tag_name: str) -> HttpResponse:
     tweet = get_tweets_by_tag(tag_name=tag_name)

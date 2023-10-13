@@ -50,7 +50,7 @@ def possible_followers(request: HttpRequest) -> dict:
     if request.user.is_authenticated:
         user = request.user
         country = user.country
-        all_users = get_possible_follower(country=country)
+        all_users = get_possible_follower(user=user, country=country)
     else:
         all_users = []
     return {'all_users': all_users}

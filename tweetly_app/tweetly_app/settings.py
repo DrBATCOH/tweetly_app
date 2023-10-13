@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.forms",
+    "debug_toolbar",
     "core.apps.CoreConfig",
 ]
 
@@ -62,6 +63,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware"
 ]
 
 ROOT_URLCONF = "tweetly_app.urls"
@@ -70,7 +72,7 @@ ROOT_URLCONF = "tweetly_app.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": ["core/presentation/templates"],
+        "DIRS": [os.path.join(BASE_DIR, "core", "presentation", "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -188,3 +190,8 @@ EMAIL_BACKEND = os.environ["EMAIL_BACKEND"]
 EMAIL_FROM = os.environ["EMAIL_FROM"]
 
 SERVER_HOST = os.environ["SERVER_HOST"]
+
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
