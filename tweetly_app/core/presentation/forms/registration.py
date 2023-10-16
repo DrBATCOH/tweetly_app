@@ -1,8 +1,19 @@
 from core.models import CountryModel
 from core.validators import AgeValidator
 from django import forms
+from django.db.utils import ProgrammingError
 
-COUNTRY = [(country.name, country.name) for country in CountryModel.objects.all()]
+
+class TableNotExists(Exception):
+    ...
+
+
+def get_all_contries() -> list:
+    try:
+        country = [(country.name, country.name) for country in CountryModel.objects.all()]
+    except ProgrammingError:
+        return []
+    return country
 
 
 class RegistrationForm(forms.Form):
@@ -36,7 +47,7 @@ class RegistrationForm(forms.Form):
         required=True,
     )
     country = forms.ChoiceField(
-        label=False, choices=COUNTRY, initial="Country", required=True
+        label=False, choices=get_all_contries(), initial="Country", required=True
     )
     birthdate = forms.DateField(
         label=False,

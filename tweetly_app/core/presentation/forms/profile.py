@@ -1,8 +1,19 @@
 from core.models import CountryModel
 from core.validators import AgeValidator, ValidateFileExtension, ValidateFileSize
 from django import forms
+from django.db.utils import ProgrammingError
 
-COUNTRY = [(country.name, country.name) for country in CountryModel.objects.all()]
+
+class TableNotExists(Exception):
+    ...
+
+
+def get_all_contries() -> list:
+    try:
+        country = [(country.name, country.name) for country in CountryModel.objects.all()]
+    except ProgrammingError:
+        return []
+    return country
 
 
 class EditProfileForm(forms.Form):
@@ -53,7 +64,7 @@ class EditProfileForm(forms.Form):
         required=False,
     )
     country = forms.ChoiceField(
-        label=False, choices=COUNTRY, initial="Country", required=False
+        label=False, choices=get_all_contries(), initial="Country", required=False
     )
     birthdate = forms.DateField(
         label=False,
