@@ -1,21 +1,16 @@
-  version: '3.8'
+version: '3.8'
 
-  services:
-    db:
-      image: postgres:latest
-      environment:
-        - POSTGRES_PASSWORD=12345678
-        - POSTGRES_USER=tw_user
-        - POSTGRES_DB=tweetly_db
-      ports:
-        - '5431:5432'
-
-    app:
-      build: .
-      ports:
-        - '8000:8000'
-      command: >
-        sh -c 'python3 ./tweetly_app/manage.py migrate &&
-        python3 ./tweetly_app/manage.py runserver 0.0.0.0:8000'
-      depends_on:
-        - db
+services:
+  db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_PASSWORD=12345678
+      - POSTGRES_USER=tw_user
+      - POSTGRES_DB=tweetly_db
+    ports:
+      - '5430:5432'
+  redis:
+    image: redis:latest
+    ports:
+      - '6379:6379'
+    

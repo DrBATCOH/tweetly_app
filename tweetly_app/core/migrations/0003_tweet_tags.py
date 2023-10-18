@@ -5,7 +5,7 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("core", "0002_populare_default_country"),
+        ("core", "0002_populate_default_country"),
     ]
 
     operations = [

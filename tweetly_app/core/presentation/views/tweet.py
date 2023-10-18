@@ -4,6 +4,7 @@ from typing import TYPE_CHECKING
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import redirect, render
 from django.views.decorators.http import require_http_methods
+from django.views.decorators.cache import cache_page
 
 if TYPE_CHECKING:
     from django.http import HttpRequest
@@ -59,6 +60,7 @@ def get_tweet_whit_comment(request: HttpRequest, tweet_id: int) -> HttpResponse:
     return render(request=request, template_name="tweet.html", context=context)
 
 
+@cache_page(180)
 @require_http_methods(request_method_list=["GET"])
 def tweet_by_tag(request: HttpRequest, tag_name: str) -> HttpResponse:
     tweet = get_tweets_by_tag(tag_name=tag_name)

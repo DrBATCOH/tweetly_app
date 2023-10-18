@@ -13,8 +13,10 @@ from core.presentation.paginator import CustomPagination, PageNotExists
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
+from django.views.decorators.cache import cache_page
 
 
+@cache_page(180)
 @require_http_methods(request_method_list=["GET"])
 def index(request: HttpRequest) -> HttpResponse:
     form = SearchTweetForm(request.GET)
